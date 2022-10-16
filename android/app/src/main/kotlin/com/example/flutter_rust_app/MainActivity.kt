@@ -25,8 +25,8 @@ class MainActivity: FlutterActivity() {
         companion object {
             val INSTANCE = Native.load(
                 "rust_android_jna_lib",
-                CGreet::class.java
-            ) as CGreet
+                JNAGreet::class.java
+            ) as JNAGreet
         }
     }
 
@@ -40,7 +40,7 @@ class MainActivity: FlutterActivity() {
                 // JNI way
 //                val message = to?.let { greet(it) }
                 // JNA way
-                val message = to?.let { CGreet.INSTANCE.cgreet(it) }
+                val message = to?.let { JNAGreet.INSTANCE.jnagreet(it) }
                 if (message !=null) {
                     result.success(message)
                 } else {
