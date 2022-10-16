@@ -84,6 +84,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "rust_android_jna_lib"
+version = "0.1.0"
+dependencies = [
+ "rust_lib",
+]
+
+[[package]]
 name = "rust_android_lib"
 version = "0.1.0"
 dependencies = [

@@ -1,2 +1,2 @@
 [workspace]
-members = ["rust_lib", "rust_android_lib"]
+members = ["rust_lib", "rust_android_lib", "rust_android_jna_lib"]

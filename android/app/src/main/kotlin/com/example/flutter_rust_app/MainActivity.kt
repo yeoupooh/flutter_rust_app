@@ -1,18 +1,34 @@
 package com.example.flutter_rust_app
 
 import androidx.annotation.NonNull
+import com.sun.jna.Library
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import com.sun.jna.Native
+
 
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "com.example.flutter_rust_app/greet"
 
-    init {
-        System.loadLibrary("rust_android_lib")
-    }
+    // JNI way
+//    init {
+//        System.loadLibrary("rust_android_lib")
+//    }
+//
+//    external fun greet(to: String): String
 
-    external fun greet(to: String): String
+    // JNA way
+    interface JNAGreet : Library {
+        fun jnagreet(to: String): String
+
+        companion object {
+            val INSTANCE = Native.load(
+                "rust_android_jna_lib",
+                CGreet::class.java
+            ) as CGreet
+        }
+    }
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -21,7 +37,10 @@ class MainActivity: FlutterActivity() {
             // This method is invoked on the main thread.
             if (call.method == "greet") {
                 val to = call.argument<String>("to")
-                val message = to?.let { greet(it) }
+                // JNI way
+//                val message = to?.let { greet(it) }
+                // JNA way
+                val message = to?.let { CGreet.INSTANCE.cgreet(it) }
                 if (message !=null) {
                     result.success(message)
                 } else {

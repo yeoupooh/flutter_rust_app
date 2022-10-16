@@ -1,16 +1,67 @@
 # flutter_rust_app
 
-A new Flutter project.
+This app demonstrate how to use Rust library on Android and iOS.
 
-## Getting Started
+# Android App
 
-This project is a starting point for a Flutter application.
+## Rust library for Android
 
-A few resources to get you started if this is your first Flutter project:
+### Setup config file: .cargo/config.toml
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+[build]
+target = [
+    "aarch64-linux-android",
+    "armv7-linux-androideabi",
+    "i686-linux-android",
+    "x86_64-linux-android",
+]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[target.aarch64-linux-android]
+# ar = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\llvm-ar.exe"
+# linker = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\aarch64-linux-android30-clang.cmd"
+ar = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+linker = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android30-clang"
+
+[target.armv7-linux-androideabi]
+# ar = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\llvm-ar.exe"
+# linker = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\armv7a-linux-androideabi30-clang.cmd"
+ar = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+linker = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang"
+
+[target.i686-linux-android]
+# ar = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\llvm-ar.exe"
+# linker = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\i686-linux-android30-clang.cmd"
+ar = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+linker = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android30-clang"
+
+[target.x86_64-linux-android]
+# ar = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+# linker = "(your android ndk path)\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\x86_64-linux-android30-clang.cmd"
+ar = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+linker = "(your android ndk path)/22.1.7171670/toolchains/llvm/prebuilt/darwin-x86_64/bin/x86_64-linux-android30-clang"
+```
+
+### Build Rust libraries
+
+```
+pushd rust_android_jna_lib
+cargo build --release
+popd
+```
+
+### Link built library files
+
+```
+. ./link_libs.sh
+```
+
+## Build Android app
+
+```
+flutter run
+```
+
+# iOS App
+
+TODO
