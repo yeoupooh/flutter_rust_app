@@ -1,11 +1,9 @@
 use rust_lib;
-use std::ffi::{c_char, CStr};
+use std::ffi::{c_char, CStr, CString};
 
 fn string_to_c_chars(s: String) -> *mut c_char {
-    let bytes = s.into_bytes();
-    let mut c_chars: Vec<c_char> = bytes.iter().map(|c| *c as c_char).collect::<Vec<c_char>>();
-    c_chars.push(0); // null-terminated
-    c_chars.as_mut_ptr()
+    let cstring = CString::new(s).unwrap();
+    cstring.into_raw()
 }
 
 fn c_chars_to_string(c_chars: *const c_char) -> String {
