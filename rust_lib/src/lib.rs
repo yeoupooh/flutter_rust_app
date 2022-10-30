@@ -1,5 +1,5 @@
 pub fn greet(to: String) -> String {
-    format!("Hello, {}", to)
+    format!("Hello, {}! from Rust", to)
 }
 
 #[cfg(test)]
@@ -9,6 +9,6 @@ mod tests {
     #[test]
     fn test_greet() {
         let result = greet("World".to_owned());
-        assert_eq!(result, "Hello, World".to_owned());
+        assert_eq!(result, "Hello, World! from Rust".to_owned());
     }
 }
