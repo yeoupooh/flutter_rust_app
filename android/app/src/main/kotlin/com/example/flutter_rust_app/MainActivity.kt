@@ -19,14 +19,14 @@ class MainActivity: FlutterActivity() {
 //    external fun greet(to: String): String
 
     // JNA way
-    interface JNAGreet : Library {
-        fun jnagreet(to: String): String
+    interface CGreet : Library {
+        fun cgreet(to: String): String
 
         companion object {
             val INSTANCE = Native.load(
                 "rust_clib",
-                JNAGreet::class.java
-            ) as JNAGreet
+                CGreet::class.java
+            ) as CGreet
         }
     }
 
@@ -40,7 +40,7 @@ class MainActivity: FlutterActivity() {
                 // JNI way
 //                val message = to?.let { greet(it) }
                 // JNA way
-                val message = to?.let { JNAGreet.INSTANCE.jnagreet(it) }
+                val message = to?.let { CGreet.INSTANCE.cgreet(it) }
                 if (message !=null) {
                     result.success(message)
                 } else {
