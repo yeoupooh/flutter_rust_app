@@ -24,7 +24,7 @@ class MainActivity: FlutterActivity() {
 
         companion object {
             val INSTANCE = Native.load(
-                "rust_android_jna_lib",
+                "rust_clib",
                 JNAGreet::class.java
             ) as JNAGreet
         }

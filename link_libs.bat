@@ -2,7 +2,7 @@
 
 set BASE_PATH=%CD%\target
 set BUILD_TARGET=release
-set LIB_NAME=librust_android_jna_lib.so
+set LIB_NAME=librust_clib.so
 set JNI_LIBS_PATH=android\app\src\main\jniLibs
 
 echo Deleting jniLibs folder

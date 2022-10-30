@@ -2,7 +2,7 @@
 
 BASE_PATH=$PWD/target
 BUILD_TARGET=release
-LIB_NAME=librust_android_jna_lib.so
+LIB_NAME=librust_clib.so
 JNI_LIBS_PATH=android/app/src/main/jniLibs
 
 rm -rf $JNI_LIBS_PATH

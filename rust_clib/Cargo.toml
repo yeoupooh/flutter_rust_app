@@ -1,5 +1,5 @@
 [package]
-name = "rust_android_jna_lib"
+name = "rust_clib"
 version = "0.1.0"
 edition = "2021"
 
