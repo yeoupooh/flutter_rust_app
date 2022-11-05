@@ -8,7 +8,7 @@ import io.flutter.plugin.common.MethodChannel
 import com.sun.jna.Native
 
 
-class MainActivity: FlutterActivity() {
+class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.example.flutter_rust_app/greet"
 
     // JNI way
@@ -32,8 +32,10 @@ class MainActivity: FlutterActivity() {
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
-                call, result ->
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            CHANNEL
+        ).setMethodCallHandler { call, result ->
             // This method is invoked on the main thread.
             if (call.method == "greet") {
                 val to = call.argument<String>("to")
@@ -41,7 +43,7 @@ class MainActivity: FlutterActivity() {
 //                val message = to?.let { greet(it) }
                 // JNA way
                 val message = to?.let { CGreet.INSTANCE.cgreet(it) }
-                if (message !=null) {
+                if (message != null) {
                     result.success(message)
                 } else {
                     result.error("UNAVAILABLE", "can't get greet message", null)
