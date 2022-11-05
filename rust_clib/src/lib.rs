@@ -19,3 +19,9 @@ pub extern "C" fn cgreet(to: *const c_char) -> *mut c_char {
     let result = rust_lib::greet(c_chars_to_string(to));
     string_to_c_chars(result)
 }
+
+#[no_mangle]
+pub extern "C" fn free_string(chars: *mut c_char) {
+    let cstring = unsafe { CString::from_raw(chars) };
+    drop(cstring);
+}
