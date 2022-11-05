@@ -6,11 +6,11 @@ import Flutter
     
     private func cgreetInternal(to: String, result: FlutterResult) {
         print("swift: to=", to.count)
-        let cstr_json = cgreet(to.cString(using: .utf8)).unsafelyUnwrapped
-        print("swift: cstring len=", strlen(cstr_json))
-        print("swift: cstring=", cstr_json)
-        let json = String(cString: cstr_json)
-        free_string(cstr_json)
+        let cstr = cgreet(to.cString(using: .utf8)).unsafelyUnwrapped
+        print("swift: cstring len=", strlen(cstr))
+        print("swift: cstring=", cstr)
+        let json = String(cString: cstr)
+        free_string(cstr)
         result(json)
     }
     
@@ -21,9 +21,9 @@ import Flutter
         
         // flutter method channel
         let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-        let batteryChannel = FlutterMethodChannel(name: "com.example.flutter_rust_app/greet",
+        let methodChannel = FlutterMethodChannel(name: "com.example.flutter_rust_app/greet",
                                                   binaryMessenger: controller.binaryMessenger)
-        batteryChannel.setMethodCallHandler({
+        methodChannel.setMethodCallHandler({
             (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
             // This method is invoked on the UI thread.
             
